@@ -74,7 +74,23 @@ class ArticulosController extends AppController {
 	public function eliminar($id) {
 
 		if (Auth::is_valid()) {
+			
+			{
+				$articulos = new Articulos();
 				
+				if ($articulos->delete((int)$id)) {
+					
+					Flash::success('<div class="alert alert-success"><button class="close" data-dismiss="alert">×</button>Los datos fueron eliminados correctamente</div>');
+					return Router::redirect();
+					
+				} else {
+					
+					Flash::warning('<div class="alert alert-error"><button class="close" data-dismiss="alert">×</button>Error al procesar los Datos</div>');
+					unset($articulos);
+				}
+				
+				return Router::redirect();
+			}
 				
 		}
 	}
