@@ -11,7 +11,7 @@ View::partial('inventario/nav');
 </div>
 <div class="row-fluid">
 	<div class="span4">
-		<?php echo Form::open('articulos/modificar', $method='POST','class="form-horizontal"');?>
+		<?php echo Form::open('', $method='POST','class="form-horizontal"');?>
 		<fieldset>
 			<legend>Ingrese los Datos</legend>
 			<div class="control-group">
@@ -21,6 +21,14 @@ View::partial('inventario/nav');
 				</div>
 				<p class="help-block">Igual o no menor a 4 caracteres ( A-Z, a-z,
 					0-9).</p>
+			</div>
+			
+			<div class="control-group">
+				<label class="control-label">Categoria:</label>
+				<div class="controls">
+					<?php echo Form::dbSelect('articulos.id_cat', 'nombre', array('categoria','find'), 'Seleccione una categoria');?>
+				</div>
+				<div class="controls"><?php echo Html::link('categoria/agregar', '<i class="icon-plus"></i>Agregar Categoria');?></div>
 			</div>
 
 			<div class="control-group">
