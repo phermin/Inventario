@@ -1,0 +1,38 @@
+<?php View::partial('inventario/header');?>
+<?php View::partial('inventario/nav');?>
+<?php View::content();?>
+
+<div class="page-header">
+	<h1>
+		Modulo Categorias <small>Agregar Nueva Categoria.</small>
+	</h1>
+</div>
+<div class="row-fluid">
+	<div class="span4">
+		<?php echo Form::open('categoria/agregar', $method='POST','class="form-horizontal"');?>
+		<fieldset>
+			<legend>Ingrese los Datos</legend>
+			<div class="control-group">
+				<label class="control-label">Nombre de Categoria:</label>
+				<div class="controls">
+					<?php echo Form::text('categoria.nombre', 'class=".span2"');?>
+				</div>
+				<p class="help-block">Igual o no menor a 4 caracteres ( A-Z, a-z,
+					0-9).</p>
+			</div>
+
+			<div class="control-group">
+				<label class="control-label">Descripcion de Categoria:</label>
+				<div class="controls">
+					<?php echo Form::textarea('categoria.descripcion');?>
+				</div>
+			</div>
+
+			<div class="form-actions">
+				<?php echo Form::submit('Guardar Datos', 'class="btn btn-primary"');?>
+				&nbsp;
+			</div>
+		</fieldset>
+		<?php echo Form::close();?>
+	</div>
+</div>

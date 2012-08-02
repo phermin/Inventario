@@ -1,0 +1,16 @@
+<?php 
+View::partial('inventario/header');
+View::content();
+?>
+<?php View::partial('inventario/nav');?>
+
+<div class="row-fluid">
+<?php View::partial('inventario/lateral');?>
+<div class="span4 offset4">
+<h4 class="alert-heading" style="margin-bottom: 10px;">Fecha y Hora</h4>
+<p><strong>Fecha:</strong> <?php echo $date = date("d M Y"); ?>
+<br>
+<strong>Hora:</strong> <?php echo $time = date("H:i");?>
+</p>
+</div>
+</div>

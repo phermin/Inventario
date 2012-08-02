@@ -1,0 +1,31 @@
+<?php View::content();?>
+<div class="page-header">
+	<h1>
+		<?php echo Html::img('logo.jpg');?>
+	</h1>
+</div>
+<div class="hero-unit">
+	<h2>Sistema de Inventario</h2>
+	<p>Ingresar al sistema</p>
+
+	<div class="row-fluid">
+		<div class="span4">
+			<?php echo Form::open('user/login',$method = 'POST','class="form-inline"');?>
+			<fieldset>
+				<?php echo Form::text('nombre', 'class="input-small" placeholder="Usuario"');?>
+				<?php echo Form::pass('password', 'class="input-small" placeholder="Clave"');?>
+				<?php echo Form::submit('Ingresar', 'class="btn btn-primary"');?>
+			</fieldset>
+			<?php echo Form::close();?>
+		</div>
+		
+		<div class="span4">
+			<h4 style="border-bottom: 1px solid #ccc; margin-bottom: 15px;">Recomendaciones de Seguridad</h4>
+			<ul class="unstyled">
+			<li style="text-align: justify;"><?php echo Html::img('Warning.png');?> Nunca revele ni transfiera su contraseña a otras personas.</li>
+			<li><br></li>
+            <li style="text-align: justify;"><?php echo Html::img('Security.png');?> Asegurese de no dejar esta pagina cargada cuando no este en el equipo y cerrar su sesión al terminar de utilizar el sistema.</li>
+             </ul>
+		</div>
+	</div>
+</div>

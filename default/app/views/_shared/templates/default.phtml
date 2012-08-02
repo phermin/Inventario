@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta http-equiv='Content-type'
+	content='text/html; charset=<?php echo APP_CHARSET ?>' />
+<title>Sistema de Inventario</title>
+<?php Tag::css('bootstrap'); ?>
+<?php Tag::css('bootstrap-responsive') ?>
+<?php echo Html::includeCss(); ?>
+</head>
+<body>
+	<div class="container">
+		<?php View::content(); ?>
+		<?php View::partial('inventario/footer'); ?>
+	</div>
+	<?php echo Tag::js('jquery/jquery.min');?>
+	<?php echo Tag::js('bootstrap/bootstrap'); ?>
+</body>
+</html>

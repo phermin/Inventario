@@ -1,0 +1,26 @@
+<?php
+View::content();
+View::partial('inventario/header');
+View::partial('inventario/nav');
+?>
+<table class="table table-striped table-bordered">
+	<thead>
+		<tr>
+			<th>Codigo de Articulo</th>
+			<th>Descripcion</th>
+			<th>Stock</th>
+			<th>P.V.P</th>
+			<th>Acciones</th>
+		</tr>
+	</thead>
+	<tbody>
+
+		<tr>
+			<td><?php echo $articulo->codart?></td>
+			<td><?php echo $articulo->descripcion?></td>
+			<td><?php echo $articulo->stock?></td>
+			<td><?php echo $articulo->precio?></td>
+			<td><?php echo Html::link("articulos/ver/$articulo->id", '<i class="icon-eye-open"></i>', 'class="btn btn-info" title="Ver"');?></td>
+		</tr>
+	</tbody>
+</table>
