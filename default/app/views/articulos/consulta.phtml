@@ -25,8 +25,8 @@ View::partial('inventario/nav');
 			<?php echo Html::link("articulos/ver/$item->id", '<i class="icon-eye-open icon-white"></i>', 'class="btn btn-info" title="Ver"');?>
 			&nbsp;
 			<?php echo Html::link("articulos/modificar/$item->id", '<i class="icon-edit icon-white"></i>', 'class="btn btn-inverse" title="Modificar"');?>
-			&nbsp;
-			<?php echo Html::link("articulos/eliminar/$item->id", '<i class="icon-trash icon-white"></i>', 'class="btn btn-danger" title="Eliminar"');?>
+			&nbsp;	
+			<?php echo Js::link("articulos/eliminar/$item->id", '<i class="icon-trash icon-white"></i>', $confirm = "¿Esta Seguro de que desea Eliminar el aritculo {$item->codart} del inventario?", $class = 'btn btn-danger');?>
 			</td>
 		</tr>
 		<?php endforeach;?>
