@@ -24,7 +24,7 @@
 			<div class="control-group">
 				<label class="control-label">Categoria:</label>
 				<div class="controls">
-					<?php echo Form::dbSelect('articulos.id_cat', 'nombre', array('categoria','find'), 'Seleccione una categoria');?>
+					<?php echo Form::dbSelect('articulos.categoria_id', 'nombre', array('categoria','find'), 'Seleccione una categoria');?>
 				</div>
 				<div class="controls"><?php echo Html::link('categoria/agregar', '<i class="icon-plus"></i>Agregar Categoria');?></div>
 			</div>
@@ -32,7 +32,7 @@
 			<div class="control-group">
 				<label class="control-label">Descripcion del Articulo:</label>
 				<div class="controls">
-					<?php echo Form::textarea('articulos.descripcion', '');?>
+					<?php echo Form::textarea('articulos.descripcion_art', '');?>
 				</div>
 			</div>
 

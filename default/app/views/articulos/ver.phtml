@@ -6,21 +6,26 @@ View::partial('inventario/nav');
 <table class="table table-striped table-bordered">
 	<thead>
 		<tr>
+			<th>Categoria</th>
 			<th>Codigo de Articulo</th>
 			<th>Descripcion</th>
 			<th>Stock</th>
 			<th>P.V.P</th>
+
 			<th>Acciones</th>
 		</tr>
 	</thead>
 	<tbody>
 
 		<tr>
+			<td><?php echo $categoria->nombre?></td>
 			<td><?php echo $articulo->codart?></td>
 			<td><?php echo $articulo->descripcion?></td>
 			<td><?php echo $articulo->stock?></td>
 			<td><?php echo $articulo->precio?></td>
-			<td><?php echo Html::link("articulos/ver/$articulo->id", '<i class="icon-eye-open"></i>', 'class="btn btn-info" title="Ver"');?></td>
+			<td><?php echo Html::link("articulos/modificar/$articulo->id", '<i class="icon-edit icon-white"></i>', 'class="btn btn-inverse" title="Modificar"');?>
+				&nbsp; <?php echo Js::link("articulos/eliminar/$articulo->id", '<i class="icon-trash icon-white"></i>', $confirm = "¿Esta Seguro de que desea Eliminar el aritculo {$articulo->codart} del inventario?", $class = 'btn btn-danger');?>
+			</td>
 		</tr>
 	</tbody>
 </table>

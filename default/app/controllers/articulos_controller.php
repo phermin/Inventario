@@ -33,12 +33,15 @@ class ArticulosController extends AppController {
 
 	}
 
-	public function ver($id) {
+	public function ver($id, $categoria_id) {
 
 		if (Auth::is_valid()) {
 				
 			$articulos = new Articulos();
+			$categoria = new Categoria();
 			$this->articulo = $articulos->consulta($id);
+			$this->categoria = $categoria->find($categoria_id);
+			
 
 		}
 
