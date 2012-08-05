@@ -4,10 +4,29 @@ View::partial('inventario/header');
 View::partial('inventario/nav');
 ?>
 
+<?php echo Form::text('autocomplete') ?> <i class="icon-search"></i>
+ 
+<script type="text/javascript" >
+    $(document).ready(function(){
+        $('input#autocomplete').autocomplete({
+ 
+            minLength : 2 , //le indicamos que busque a partir de haber escrito dos o mas caracteres en el input
+ 
+            source : function( request , response ){
+ 
+                var url = "<?php echo PUBLIC_PATH ?>articulos/autocomplete";   //url donde buscará los estados
+ 
+                $.post(url, { 'busqueda' : request.term }, response, 'json');
+ 
+                //busqueda es la varible que mandaremos por post con el contenido del input
+            }
+        });
+    });
+</script>
+
 <table class="table table-striped table-bordered">
 	<thead>
 		<tr>
-			<th>categoria</th>
 			<th>Codigo de Articulo</th>
 			<th>Descripcion</th>
 			<th>Stock</th>
@@ -15,11 +34,10 @@ View::partial('inventario/nav');
 			<th>Acciones</th>
 		</tr>
 	</thead>
-
+	<?php ?>
 	<tbody>
 		<?php foreach ($lista->items as $item) : ?>
 		<tr>
-			<td><?php echo $item->categoria_id?></td>
 			<td><?php echo $item->codart?></td>
 			<td><?php echo $item->descripcion_art?></td>
 			<td><?php echo $item->stock?></td>
@@ -30,7 +48,5 @@ View::partial('inventario/nav');
 			</td>
 		</tr>
 		<?php endforeach;?>
-
 	</tbody>
 </table>
-

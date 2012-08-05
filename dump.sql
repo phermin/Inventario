@@ -80,12 +80,12 @@ SET default_with_oids = false;
 
 CREATE TABLE articulos (
     id integer NOT NULL,
-    codart character(10) NOT NULL,
-    descripcion text NOT NULL,
+    codart character(4) NOT NULL,
+    descripcion_art text NOT NULL,
     stock integer NOT NULL,
     minimo integer NOT NULL,
     precio money NOT NULL,
-    id_cat integer NOT NULL
+    categoria_id integer NOT NULL
 );
 
 
@@ -116,7 +116,7 @@ ALTER SEQUENCE articulos_id_seq OWNED BY articulos.id;
 -- Name: articulos_id_seq; Type: SEQUENCE SET; Schema: cauchera; Owner: piryguiry
 --
 
-SELECT pg_catalog.setval('articulos_id_seq', 8, true);
+SELECT pg_catalog.setval('articulos_id_seq', 21, true);
 
 
 --
@@ -126,7 +126,7 @@ SELECT pg_catalog.setval('articulos_id_seq', 8, true);
 CREATE TABLE categoria (
     id integer NOT NULL,
     nombre character(25) NOT NULL,
-    descripcion text NOT NULL
+    descripcion_cat text NOT NULL
 );
 
 
@@ -164,7 +164,7 @@ ALTER SEQUENCE categoria_id_seq OWNED BY categoria.id;
 -- Name: categoria_id_seq; Type: SEQUENCE SET; Schema: cauchera; Owner: piryguiry
 --
 
-SELECT pg_catalog.setval('categoria_id_seq', 3, true);
+SELECT pg_catalog.setval('categoria_id_seq', 4, true);
 
 
 --
@@ -226,7 +226,7 @@ CREATE TABLE ordenpago (
     cedula character(8) NOT NULL,
     monto money NOT NULL,
     fecha time without time zone DEFAULT now() NOT NULL,
-    id_venta integer NOT NULL
+    venta_id integer NOT NULL
 );
 
 
@@ -411,10 +411,11 @@ ALTER TABLE ONLY venta ALTER COLUMN id SET DEFAULT nextval('venta_id_seq'::regcl
 -- Data for Name: articulos; Type: TABLE DATA; Schema: cauchera; Owner: piryguiry
 --
 
-COPY articulos (id, codart, descripcion, stock, minimo, precio, id_cat) FROM stdin;
-5	M01       	Neumaticos Michelin	50	10	€350,00	1
-6	T02       	Toyo Tires 2	100	10	€875,00	1
-7	SH01      	Aceite Shell	300	10	€75,00	2
+COPY articulos (id, codart, descripcion_art, stock, minimo, precio, categoria_id) FROM stdin;
+16	SH01	aceite shell	100	10	€75,00	2
+17	AM01	aceite tapa amarilla	100	10	€45,00	2
+20	T02 	toyo 2	100	10	€1.575,00	1
+21	R01 	Rin 16\\"	100	10	€575,00	3
 \.
 
 
@@ -422,10 +423,11 @@ COPY articulos (id, codart, descripcion, stock, minimo, precio, id_cat) FROM std
 -- Data for Name: categoria; Type: TABLE DATA; Schema: cauchera; Owner: piryguiry
 --
 
-COPY categoria (id, nombre, descripcion) FROM stdin;
+COPY categoria (id, nombre, descripcion_cat) FROM stdin;
 1	Neumaticos               	Duros, Blandos, Super blandos.
 2	Aceites                  	Aceites Refrigerantes, Aceites de Motor
 3	Rines                    	16\\", 17\\", 18\\"
+4	Frenos                   	Disco, Tambor
 \.
 
 
@@ -441,7 +443,7 @@ COPY cliente (id, cedula, nombres, apellidos, rif) FROM stdin;
 -- Data for Name: ordenpago; Type: TABLE DATA; Schema: cauchera; Owner: piryguiry
 --
 
-COPY ordenpago (id, cedula, monto, fecha, id_venta) FROM stdin;
+COPY ordenpago (id, cedula, monto, fecha, venta_id) FROM stdin;
 \.
 
 
@@ -558,7 +560,7 @@ ALTER TABLE ONLY venta
 --
 
 ALTER TABLE ONLY articulos
-    ADD CONSTRAINT articulos_id_cat_fkey FOREIGN KEY (id_cat) REFERENCES categoria(id) ON UPDATE CASCADE ON DELETE CASCADE;
+    ADD CONSTRAINT articulos_id_cat_fkey FOREIGN KEY (categoria_id) REFERENCES categoria(id) ON UPDATE CASCADE ON DELETE CASCADE;
 
 
 --
@@ -574,7 +576,7 @@ ALTER TABLE ONLY ordenpago
 --
 
 ALTER TABLE ONLY ordenpago
-    ADD CONSTRAINT ordenpago_id_venta_fkey FOREIGN KEY (id_venta) REFERENCES venta(id) ON UPDATE CASCADE ON DELETE CASCADE;
+    ADD CONSTRAINT ordenpago_id_venta_fkey FOREIGN KEY (venta_id) REFERENCES venta(id) ON UPDATE CASCADE ON DELETE CASCADE;
 
 
 --

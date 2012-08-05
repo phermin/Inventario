@@ -36,12 +36,12 @@ class ArticulosController extends AppController {
 	public function ver($id, $categoria_id) {
 
 		if (Auth::is_valid()) {
-				
+
 			$articulos = new Articulos();
 			$categoria = new Categoria();
 			$this->articulo = $articulos->consulta($id);
 			$this->categoria = $categoria->find($categoria_id);
-			
+
 
 		}
 
@@ -50,63 +50,74 @@ class ArticulosController extends AppController {
 	public function modificar($id) {
 
 		$articulos = new Articulos();
-		
-		if (Auth::is_valid()) {
-		
-		if(Input::hasPost('articulos')) {
 
-			if($articulos->update(Input::post('articulos'))) {
-				
-				Flash::success('<div class="alert alert-success"><button class="close" data-dismiss="alert">×</button>Los datos han sido almacenados correctamente</div>');
-				return Router::redirect();
-				
+		if (Auth::is_valid()) {
+
+			if(Input::hasPost('articulos')) {
+
+				if($articulos->update(Input::post('articulos'))) {
+
+					Flash::success('<div class="alert alert-success"><button class="close" data-dismiss="alert">×</button>Los datos han sido almacenados correctamente</div>');
+					return Router::redirect();
+
+				} else {
+
+					Flash::warning('<div class="alert alert-error"><button class="close" data-dismiss="alert">×</button>Error al procesar los Datos</div>');
+					unset($articulos);
+				}
 			} else {
-				
-				Flash::warning('<div class="alert alert-error"><button class="close" data-dismiss="alert">×</button>Error al procesar los Datos</div>');
-				unset($articulos);
+					
+				$this->articulos = $articulos->find_by_id((int)$id);
 			}
-		} else {
-			
-			$this->articulos = $articulos->find_by_id((int)$id);
+
 		}
-		
-		}
-		
+
 	}
 
 	public function eliminar($id) {
 
 		if (Auth::is_valid()) {
-			
+
 			{
 				$articulos = new Articulos();
-				
+
 				if ($articulos->delete((int)$id)) {
-					
+
 					Flash::success('<div class="alert alert-success"><button class="close" data-dismiss="alert">×</button>Los datos fueron eliminados correctamente</div>');
 					return Router::redirect();
-					
+
 				} else {
-					
+
 					Flash::warning('<div class="alert alert-error"><button class="close" data-dismiss="alert">×</button>Error al procesar los Datos</div>');
 					unset($articulos);
 				}
-				
+
 				return Router::redirect();
 			}
-				
+
 		}
 	}
 
 	public function consulta($page = 1) {
 
 		if (Auth::is_valid()) {
-				
+
 			$articulos = new Articulos();
 			$this->lista = $articulos->ListarArticulos($page);
-				
+
 		} else {
 			Flash::warning('<div class="alert alert-warning"><button class="close" data-dismiss="alert">×</button>No ha iniciado sesion.</div>');
+		}
+	}
+
+	public function autocomplete() {
+		View::template(NULL);
+		View::select(NULL);
+		if (Input::isAjax()) { //solo devolvemos los estados si se accede desde ajax
+			$busqueda = Input::post('busqueda');
+			$dato = Load::model('articulos')->obtener_datos($busqueda);
+			die(json_encode($estados)); // solo devolvemos los datos, sin template ni vista
+			//json_encode nos devolverá el array en formato json ["aragua","carabobo","..."]
 		}
 	}
 

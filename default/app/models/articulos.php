@@ -20,9 +20,19 @@ class Articulos extends ActiveRecord {
 		return $this->find($id);
 	}
 
-	public function getnombre($categora_id) {
+	public function obtener_datos($dato) {
 
-		return $this->find("categoria_id = $categoria_id, nombre, model: categoria");
+		if ($dato != '') {
+			$dato = stripcslashes($dato);
+			$res = $this->find('columns: articulos', "estado like '%{$dato}%'");
+			if ($res) {
+				foreach ($res as $dato) {
+					$datos[] = $dato->estado;
+				}
+				return $datos;
+			}
+		}
+		return array('no hubo coincidencias');
 	}
 
 }
