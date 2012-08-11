@@ -69,6 +69,7 @@ class UserController extends AppController {
 
 					if ($usuarios->save()) {
 						Flash::success('<div class="alert alert-success"><button class="close" data-dismiss="alert">×</button>Los datos han sido almacenados correctamente</div>');
+						Router::redirect('user/menu');
 					} else {
 						Flash::error('<div class="alert alert-error"><button class="close" data-dismiss="alert">×</button>Error al procesar los Datos</div>');
 						unset($usuarios);
@@ -117,12 +118,38 @@ class UserController extends AppController {
 
 				} else {
 
-					$this->usuario = $usuario->find_first((int)$id);
+					$this->usuario = $usuario->find_first($id);
 				}
 			}
 
 		} else {
 
+			Flash::warning('<div class="alert"><button class="close" data-dismiss="alert">×</button>No tiene privilegios para realizar esta accion</div>');
+			Router::redirect('menu/index');
+		}
+	}
+	
+	public function eliminar($id) {
+		
+		$rol = Auth::get('tipo');
+		
+		if (Auth::is_valid() and $rol != 'f') {
+			
+			$usuario = new Usuarios();
+			
+			$this->usuario = $usuario->find_first((int)$id);
+			
+			if ($usuario->delete()) {
+				
+						Flash::success('<div class="alert alert-success"><button class="close" data-dismiss="alert">×</button>El usuario fue eliminado</div>');
+						Router::redirect('user/menu');
+			} else {
+				
+				Flash::error('<div class="alert alert-error"><button class="close" data-dismiss="alert">×</button>Error al procesar los Datos</div>');
+				unset($usuario);
+			}
+		} else {
+			
 			Flash::warning('<div class="alert"><button class="close" data-dismiss="alert">×</button>No tiene privilegios para realizar esta accion</div>');
 			Router::redirect('menu/index');
 		}
