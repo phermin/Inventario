@@ -1,0 +1,40 @@
+<?php 
+View::content();
+View::partial('inventario/header');
+View::partial('inventario/nav');
+?>
+
+<table class="table table-striped table-bordered">
+	<thead>
+		<tr>
+			<th>Codigo de Articulo</th>
+			<th>Descripcion</th>
+			<th>Stock</th>
+			<th>P.V.P</th>
+			<th>Acciones</th>
+		</tr>
+	</thead>
+	<tbody>
+		<?php foreach ($lista->items as $item) : ?>
+		<tr>
+			<td><?php echo $item->codart?></td>
+			<td><?php echo $item->descripcion_art?></td>
+			<td><?php echo $item->stock?></td>
+			<td><?php echo $item->precio?></td>
+			<td><?php echo Html::link("articulos/ver/$item->id/$item->categoria_id", '<i class="icon-eye-open icon-white"></i>', 'class="btn btn-info" title="Ver"');?>
+				&nbsp; <?php echo Html::link("articulos/modificar/$item->id", '<i class="icon-edit icon-white"></i>', 'class="btn btn-inverse" title="Modificar"');?>
+				&nbsp; <?php echo Js::link("articulos/eliminar/$item->id", '<i class="icon-trash icon-white"></i>', $confirm = "¿Esta Seguro de que desea Eliminar el aritculo {$item->codart} del inventario?", $class = 'btn btn-danger');?>
+			</td>
+		</tr>
+		<?php endforeach;?>
+	</tbody>
+</table>
+
+<ul class="pager">
+  <li class="previous">
+    <?php if($lista->prev) echo Html::linkAction("consulta/$lista->prev/", '&larr; Anterior');?>
+  </li>
+  <li class="next">
+    <?php if($lista->next) echo Html::linkAction("consulta/$lista->next/", 'Próximo &rarr;');?>
+  </li>
+</ul>

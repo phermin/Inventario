@@ -1,0 +1,60 @@
+<?php
+View::partial('inventario/header');
+View::content();
+View::partial('inventario/nav');
+?>
+
+<div class="page-header">
+	<h1>
+		Modulo Usuarios <small>Modificar Datos de Usuario. <?php print Auth::get('tipo');?> <?php print Auth::is_valid();?></small>
+	</h1>
+</div>
+<div class="row-fluid">
+	<div class="span4">
+		<?php echo Form::open('user/modificar', $method='POST','class="form-horizontal"');?>
+		<fieldset>
+			<legend>Ingrese los Datos</legend>
+			<div class="control-group">
+				<label class="control-label">Nombre de Usuario:</label>
+				<div class="controls">
+					<?php echo Form::text('usuarios.nombre', 'class=".span2"');?>
+				</div>
+				<p class="help-block">Igual o no menor a 6 caracteres ( A-Z, a-z,
+					0-9).</p>
+			</div>
+
+			<div class="control-group">
+				<label class="control-label">Escoge contraseña:</label>
+				<div class="controls">
+					<?php echo Form::pass('usuarios.password', 'class=".span2"');?>
+				</div>
+				<p class="help-block">Igual o no menor a 6 caracteres</p>
+			</div>
+
+			<div class="control-group">
+				<label class="control-label">Verifica contraseña:</label>
+				<div class="controls">
+					<?php echo Form::pass('usuarios.password2', 'class=".span2"');?>
+				</div>
+			</div>
+
+			<div class="control-group">
+				<label class="control-label" for="input01">Tipo de Usuario</label>
+				<div class="controls">
+					<?php 
+					$data = array(''=>'Seleccione una Opcion','0'=>'Basico',
+							'1'=>'Administrativo');
+					?>
+					<?php echo Form::select('usuarios.tipo', $data);?>
+				</div>
+			</div>
+
+			<div class="form-actions">
+				<?php echo Form::hidden('usuarios.id');?>
+				<?php echo Form::submit('Guardar Datos', 'class="btn btn-primary"');?>
+				&nbsp;
+			</div>
+		</fieldset>
+		<?php echo Form::close();?>
+	</div>
+</div>
