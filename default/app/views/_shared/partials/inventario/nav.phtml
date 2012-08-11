@@ -25,7 +25,7 @@
 							if (Auth::get('tipo') == 't'){
 								echo Html::link('articulos/index', '<i class="icon-list-alt"></i> Gestion de Articulos');
 							}?></li>
-							<li><a href="#"><i class="icon-user"></i> Gestion de Usuarios</a>
+							<li><?php echo Html::link('user/menu', '<i class="icon-user"></i> Gestion de Usuarios');?>
 							</li>
 						</ul></li>
 				</ul>

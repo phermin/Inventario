@@ -3,9 +3,13 @@
 Load::model('usuarios');
  
 class UserController extends AppController {
-     
+
     public function index() {
          
+    }
+    
+    public function menu() {
+    
     }
     
     public function login() {
@@ -43,6 +47,10 @@ class UserController extends AppController {
     
     public function crear() {
     	
+    	$rol = Auth::get('tipo');
+    	
+    	if ($rol != 'f') { 
+    	
     	$usuarios = new Usuarios();
          
         if (Input::hasPost('usuarios')) {
@@ -67,6 +75,12 @@ class UserController extends AppController {
                 unset($usuarios['password']);
             }
         }
+    } else {
+    	
+    	Flash::warning('No tiene privilegios para ejecutar esta accion');
+    	Router::redirect('menu/index');
+    }
+    	
     }
      
 }
