@@ -4,7 +4,7 @@ class Articulos extends ActiveRecord {
 
 	protected $schema = 'cauchera';
 
-	public function ListarArticulos($page, $ppage=20) {
+	public function ListarArticulos($page, $ppage=10) {
 
 		return $this->paginate("page: $page", "per_page: $ppage", 'order: categoria_id asc');
 		//$sql = "select codart, descripcion_art, stock, precio, nombre from articulos as b inner join categoria as a on (b.categoria_id = a.id)";
@@ -14,25 +14,11 @@ class Articulos extends ActiveRecord {
 		//SQL Postgres SELECT codart, descripcion_art, stock, precio, nombre from articulos as b inner join categoria as a on (b.categoria_id = a.id)
 
 	}
-
-	public function consulta($id) {
-
-		return $this->find($id);
-	}
-
-	public function obtener_datos($dato) {
-
-		if ($dato != '') {
-			$dato = stripcslashes($dato);
-			$res = $this->find('columns: articulos', "estado like '%{$dato}%'");
-			if ($res) {
-				foreach ($res as $dato) {
-					$datos[] = $dato->estado;
-				}
-				return $datos;
-			}
-		}
-		return array('no hubo coincidencias');
+	
+	public function filtro($id) {
+		
+		return $this->find('columns: categoria_id', "codart like '%{$id}%'");
+		
 	}
 
 }

@@ -39,7 +39,7 @@ class ArticulosController extends AppController {
 
 			$articulos = new Articulos();
 			$categoria = new Categoria();
-			$this->articulo = $articulos->consulta($id);
+			$this->articulo = $articulos->find($id);
 			$this->categoria = $categoria->find($categoria_id);
 
 
@@ -66,7 +66,7 @@ class ArticulosController extends AppController {
 					unset($articulos);
 				}
 			} else {
-					
+
 				$this->articulos = $articulos->find_by_id((int)$id);
 			}
 
@@ -110,14 +110,13 @@ class ArticulosController extends AppController {
 		}
 	}
 
-	public function autocomplete() {
-		View::template(NULL);
-		View::select(NULL);
-		if (Input::isAjax()) { //solo devolvemos los estados si se accede desde ajax
-			$busqueda = Input::post('busqueda');
-			$dato = Load::model('articulos')->obtener_datos($busqueda);
-			die(json_encode($estados)); // solo devolvemos los datos, sin template ni vista
-			//json_encode nos devolverá el array en formato json ["aragua","carabobo","..."]
+	public function filtro() {
+
+		//se verifica si se ha enviado el formulario (submit)
+		if (Input::hasPost('articulos')) {
+
+			$articulos = new Articulos(Input::post('articulos'));
+			$this->lista = $articulos->filtro($id);
 		}
 	}
 
