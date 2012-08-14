@@ -1,9 +1,8 @@
 <?php 
 
-Load::model('usuarios');
+Load::models('usuarios');
 
 class UserController extends AppController {
-
 
 	public function index() {
 
@@ -22,7 +21,7 @@ class UserController extends AppController {
 
 			$nombre = Input::post("nombre");
 			$password = sha1(Input::post("password"));
-			$usuario=new Usuarios();
+			$usuario = new Usuarios();
 			$auth = new Auth("model", "class: usuarios", "nombre: $nombre", "password: $password");
 
 			if ($auth->authenticate()) {
@@ -94,17 +93,17 @@ class UserController extends AppController {
 
 		if (Auth::is_valid() and $rol != 'f') {
 
-			$usuario = new Usuarios();
+			$usuarios = new Usuarios();
 
 			if (Input::hasPost('usuarios')) {
 
-				$usuario = Input::post('usuario');
+				$usuarios = Input::post('usuarios');
 
-				if ($usuario['password'] == $usuario['password2']) {
+				if ($usuarios['password'] == $usuarios['password2']) {
 
-					$usuario['password'] = sha1($usuario['password']);
+					$usuarios['password'] = sha1($usuarios['password']);
 
-					$usuario = new Usuarios();
+					$usuarios = new Usuarios();
 
 					if ($usuario->update()) {
 
@@ -112,48 +111,53 @@ class UserController extends AppController {
 
 					} else {
 
-						Flash::warning('las claves no coinciden');
-						unset($usuario['password']);
+						Flash::warning('error al procesar los datos');
+						unset($usuarios['password']);
 					}
 
 				} else {
 
-					$this->usuario = $usuario->find_first($id);
+					Flash::warning('las claves no coinciden');
 				}
+					
+
+			} else {
+				
+				$this->usuarios = $usuarios->find_first((int)$id);
 			}
 
 		} else {
-
 			Flash::warning('<div class="alert"><button class="close" data-dismiss="alert">×</button>No tiene privilegios para realizar esta accion</div>');
 			Router::redirect('menu/index');
 		}
 	}
-	
+
 	public function eliminar($id) {
-		
+
 		$rol = Auth::get('tipo');
-		
+
 		if (Auth::is_valid() and $rol != 'f') {
-			
+
 			$usuario = new Usuarios();
-			
+
 			$this->usuario = $usuario->find_first((int)$id);
-			
+
 			if ($usuario->delete()) {
-				
-						Flash::success('<div class="alert alert-success"><button class="close" data-dismiss="alert">×</button>El usuario fue eliminado</div>');
-						Router::redirect('user/menu');
+
+				Flash::success('<div class="alert alert-success"><button class="close" data-dismiss="alert">×</button>El usuario fue eliminado</div>');
+				Router::redirect('user/menu');
 			} else {
-				
+
 				Flash::error('<div class="alert alert-error"><button class="close" data-dismiss="alert">×</button>Error al procesar los Datos</div>');
 				unset($usuario);
 			}
 		} else {
-			
+
 			Flash::warning('<div class="alert"><button class="close" data-dismiss="alert">×</button>No tiene privilegios para realizar esta accion</div>');
 			Router::redirect('menu/index');
 		}
 	}
+
 }
 
 ?>

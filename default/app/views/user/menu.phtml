@@ -25,7 +25,7 @@ View::partial('inventario/nav');
 			<td><?php if ($item->tipo == 't') {print "Administrador";} else {print "Basico";}?>
 			<td>
 				<?php $nombre = trim($item->nombre);?>
-				&nbsp; <?php echo Html::link("user/modificar/$item->id", '<i class="icon-edit icon-white"></i>', 'class="btn btn-inverse" title="Modificar Datos"');?>
+				&nbsp; <?php echo Html::link("user/modificar/$item->id", '<i class="icon-edit icon-white"></i>', 'class="btn btn-inverse" title="Modificar el Tipo de Cuenta"');?>
 				&nbsp; <?php echo Js::link("user/eliminar/$item->id", '<i class="icon-trash icon-white"></i>', $confirm = "¿Esta Seguro de que desea Eliminar el Usuario {$nombre} del Sistema?", $class = 'btn btn-danger');?>
 			</td>
 		</tr>
