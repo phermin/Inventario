@@ -13,33 +13,8 @@ View::partial('inventario/nav');
 	<div class="span4">
 		<?php echo Form::open('', $method='POST','class="form-horizontal"');?>
 		<fieldset>
-			<legend>Ingrese los Datos</legend>
-			<div class="control-group">
-				<label class="control-label">Nombre de Usuario:</label>
-				<div class="controls">
-				<?php 
-				$nombre = trim(Form::getFieldValue('usuarios.nombre'));
-				echo Form::text('usuarios.nombre', 'class=".span2"', "{$nombre}");
-				?>
-				</div>
-				<p class="help-block">Igual o no menor a 6 caracteres ( A-Z, a-z,
-					0-9).</p>
-			</div>
+			<legend>Modificar Permisologia de la Cuenta</legend>
 
-			<div class="control-group">
-				<label class="control-label">Nueva contraseña:</label>
-				<div class="controls">
-					<?php echo Form::pass('usuarios.password', 'class=".span2"', '');?>
-				</div>
-				<p class="help-block">Igual o no menor a 6 caracteres</p>
-			</div>
-
-			<div class="control-group">
-				<label class="control-label">Verifica contraseña:</label>
-				<div class="controls">
-					<?php echo Form::pass('usuarios.password2', 'class=".span2"');?>
-				</div>
-			</div>
 
 			<div class="control-group">
 				<label class="control-label" for="input01">Tipo de Usuario</label>
@@ -54,6 +29,8 @@ View::partial('inventario/nav');
 
 			<div class="form-actions">
 				<?php echo Form::hidden('usuarios.id');?>
+				<?php echo Form::hidden('usuarios.nombre');?>
+				<?php echo Form::hidden('usuarios.password');?>
 				<?php echo Form::submit('Guardar Datos', 'class="btn btn-primary"');?>
 				&nbsp;
 			</div>

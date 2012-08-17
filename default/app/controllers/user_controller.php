@@ -97,36 +97,26 @@ class UserController extends AppController {
 
 			if (Input::hasPost('usuarios')) {
 
-				$usuarios = Input::post('usuarios');
-
-				if ($usuarios['password'] == $usuarios['password2']) {
-
-					$usuarios['password'] = sha1($usuarios['password']);
-
-					$usuarios = new Usuarios();
-
-					if ($usuario->update()) {
+				if ($usuarios->update(Input::post('usuarios'))) {
 
 						Flash::success('Los datos fueron almacenados');
+						Router::redirect('user/menu');
 
 					} else {
 
 						Flash::warning('error al procesar los datos');
-						unset($usuarios['password']);
+						unset($usuarios);
+						Router::redirect('user/menu');
 					}
 
 				} else {
-
-					Flash::warning('las claves no coinciden');
+					
+					$this->usuarios = $usuarios->find_first((int)$id);
+					
 				}
 					
-
-			} else {
-				
-				$this->usuarios = $usuarios->find_first((int)$id);
-			}
-
 		} else {
+				
 			Flash::warning('<div class="alert"><button class="close" data-dismiss="alert">×</button>No tiene privilegios para realizar esta accion</div>');
 			Router::redirect('menu/index');
 		}
