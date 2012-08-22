@@ -115,6 +115,13 @@ ALTER SEQUENCE articulos_id_seq OWNED BY articulos.id;
 
 
 --
+-- Name: articulos_id_seq; Type: SEQUENCE SET; Schema: cauchera; Owner: piryguiry
+--
+
+SELECT pg_catalog.setval('articulos_id_seq', 1, true);
+
+
+--
 -- Name: categoria; Type: TABLE; Schema: cauchera; Owner: piryguiry; Tablespace: 
 --
 
@@ -153,6 +160,13 @@ ALTER TABLE cauchera.categoria_id_seq OWNER TO piryguiry;
 --
 
 ALTER SEQUENCE categoria_id_seq OWNED BY categoria.id;
+
+
+--
+-- Name: categoria_id_seq; Type: SEQUENCE SET; Schema: cauchera; Owner: piryguiry
+--
+
+SELECT pg_catalog.setval('categoria_id_seq', 1, true);
 
 
 --
@@ -199,6 +213,13 @@ ALTER SEQUENCE cliente_id_seq OWNED BY proveedores.id;
 
 
 --
+-- Name: cliente_id_seq; Type: SEQUENCE SET; Schema: cauchera; Owner: piryguiry
+--
+
+SELECT pg_catalog.setval('cliente_id_seq', 1, false);
+
+
+--
 -- Name: clientes; Type: TABLE; Schema: cauchera; Owner: piryguiry; Tablespace: 
 --
 
@@ -236,6 +257,13 @@ ALTER SEQUENCE clientes_id_seq OWNED BY clientes.id;
 
 
 --
+-- Name: clientes_id_seq; Type: SEQUENCE SET; Schema: cauchera; Owner: piryguiry
+--
+
+SELECT pg_catalog.setval('clientes_id_seq', 1, false);
+
+
+--
 -- Name: compra; Type: TABLE; Schema: cauchera; Owner: piryguiry; Tablespace: 
 --
 
@@ -269,6 +297,13 @@ ALTER TABLE cauchera.compra_id_seq OWNER TO piryguiry;
 --
 
 ALTER SEQUENCE compra_id_seq OWNED BY compra.id;
+
+
+--
+-- Name: compra_id_seq; Type: SEQUENCE SET; Schema: cauchera; Owner: piryguiry
+--
+
+SELECT pg_catalog.setval('compra_id_seq', 1, false);
 
 
 --
@@ -315,6 +350,13 @@ ALTER SEQUENCE ordenpago_id_seq OWNED BY ordenpago.id;
 
 
 --
+-- Name: ordenpago_id_seq; Type: SEQUENCE SET; Schema: cauchera; Owner: piryguiry
+--
+
+SELECT pg_catalog.setval('ordenpago_id_seq', 1, false);
+
+
+--
 -- Name: usuarios; Type: TABLE; Schema: cauchera; Owner: piryguiry; Tablespace: 
 --
 
@@ -357,6 +399,13 @@ ALTER SEQUENCE usuarios_id_seq OWNED BY usuarios.id;
 
 
 --
+-- Name: usuarios_id_seq; Type: SEQUENCE SET; Schema: cauchera; Owner: piryguiry
+--
+
+SELECT pg_catalog.setval('usuarios_id_seq', 9, true);
+
+
+--
 -- Name: venta; Type: TABLE; Schema: cauchera; Owner: piryguiry; Tablespace: 
 --
 
@@ -396,6 +445,13 @@ ALTER TABLE cauchera.venta_id_seq OWNER TO piryguiry;
 --
 
 ALTER SEQUENCE venta_id_seq OWNED BY venta.id;
+
+
+--
+-- Name: venta_id_seq; Type: SEQUENCE SET; Schema: cauchera; Owner: piryguiry
+--
+
+SELECT pg_catalog.setval('venta_id_seq', 1, false);
 
 
 --
@@ -452,6 +508,59 @@ ALTER TABLE ONLY usuarios ALTER COLUMN id SET DEFAULT nextval('usuarios_id_seq':
 --
 
 ALTER TABLE ONLY venta ALTER COLUMN id SET DEFAULT nextval('venta_id_seq'::regclass);
+
+
+--
+-- Data for Name: articulos; Type: TABLE DATA; Schema: cauchera; Owner: piryguiry
+--
+
+INSERT INTO articulos VALUES (1, 'SH01', 'Aceite shell', 100, 10, '€75,00', 1);
+
+
+--
+-- Data for Name: categoria; Type: TABLE DATA; Schema: cauchera; Owner: piryguiry
+--
+
+INSERT INTO categoria VALUES (1, 'Aceites                  ', 'Motor, refrigerante.');
+
+
+--
+-- Data for Name: clientes; Type: TABLE DATA; Schema: cauchera; Owner: piryguiry
+--
+
+
+
+--
+-- Data for Name: compra; Type: TABLE DATA; Schema: cauchera; Owner: piryguiry
+--
+
+
+
+--
+-- Data for Name: ordenpago; Type: TABLE DATA; Schema: cauchera; Owner: piryguiry
+--
+
+
+
+--
+-- Data for Name: proveedores; Type: TABLE DATA; Schema: cauchera; Owner: piryguiry
+--
+
+
+
+--
+-- Data for Name: usuarios; Type: TABLE DATA; Schema: cauchera; Owner: piryguiry
+--
+
+INSERT INTO usuarios VALUES (8, 'admin                    ', 'd033e22ae348aeb5660fc2140aec35850c4da997     ', true);
+INSERT INTO usuarios VALUES (1, 'piryguiry                ', '0a5ed5a7e49f5a2d8fa57fddbb16883b656ccce0     ', true);
+INSERT INTO usuarios VALUES (9, 'basico                   ', '9b4fd24d2912a6c16e609bdcf27bf2cb8fec12bf     ', false);
+
+
+--
+-- Data for Name: venta; Type: TABLE DATA; Schema: cauchera; Owner: piryguiry
+--
+
 
 
 --

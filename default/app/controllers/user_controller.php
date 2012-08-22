@@ -147,6 +147,42 @@ class UserController extends AppController {
 			Router::redirect('menu/index');
 		}
 	}
+	
+	public function pass() {
+
+		$id = Auth::get('id');
+		
+		$usuario = new Usuarios();
+		
+		$this->usuario = $usuario->find_first((int)$id);
+		
+		if (Input::hasPost('usuarios')) {
+			
+			$usuario = Input::post('usuarios');
+			
+			//$password = sha1($usuario['password']);
+			
+			if ($usuario['password'] == $usuario['password2']) {
+				
+				$usuario = sha1($usuario['password']);
+				
+				$usuario = new Usuarios($usuario);
+				
+				if ($usuario->update_all($usuario)) {
+					
+					Flash::success('los datos fueron almacenados');
+				} else {
+					
+					Flash::error('error al procesar los datos');
+				}
+				
+			} else {
+				
+				Flash::success('las claves no coinciden');
+			}
+		}
+		
+	}
 
 }
 
